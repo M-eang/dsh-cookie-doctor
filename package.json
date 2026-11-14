@@ -1,0 +1,53 @@
+{
+  "name": "dsh-cookie-doctor",
+  "version": "1.0.0",
+  "author": "M-eang",
+  "private": false,
+  "description": "DSH 启动时自动清掉 Chromium cookie 库里残留的 dsh-auth-* 行，避免请求头超过 16 KB 上限导致 431（被误报为 desktop welcome 认证失败）。",
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "node --check index.js && node --check lib/clean.js",
+    "probe": "node test/probe.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "manifestVersion": 1,
+    "displayName": "Cookie 医生",
+    "description": "每次启动时清掉残留的 dsh-auth-* cookie，防止请求头溢出（431 被误报成认证失败）。",
+    "meta": {
+      "title": {
+        "zh-CN": "Cookie 医生",
+        "en": "Cookie Doctor"
+      },
+      "description": {
+        "zh-CN": "自动清理 DSH 每次启动累积的 dsh-auth-* cookie",
+        "en": "Purge accumulated dsh-auth-* cookies on every launch"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/M-eang/dsh-cookie-doctor.git"
+  },
+  "homepage": "https://github.com/M-eang/dsh-cookie-doctor#readme",
+  "bugs": {
+    "url": "https://github.com/M-eang/dsh-cookie-doctor/issues"
+  }
+}

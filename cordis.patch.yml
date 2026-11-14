@@ -1,0 +1,7 @@
+# dsh-cookie-doctor 的 bundle patch。
+#
+# 只有宿主半边，没有 client 半边，所以不需要在 package.json 里声明 dsh.client。
+# 不 inject 任何服务：本行必须在最早阶段 apply，晚于 welcome 就再没机会（库被独占）。
+- insert:
+    - id: cookie-doctor
+      name: dsh-cookie-doctor
